@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-may-2014 3:10:36 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="appcostal.model.Paso" table="paso" catalog="appcostal">
+        <id name="idpaso" type="java.lang.Integer">
+            <column name="idpaso" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="hermandad" class="appcostal.model.Hermandad" fetch="select">
+            <column name="idhermandad" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="64" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="Tipo" length="32" not-null="true" />
+        </property>
+        <set name="igualas" table="iguala" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idpaso" not-null="true" />
+            </key>
+            <one-to-many class="appcostal.model.Iguala" />
+        </set>
+        <set name="procesions" table="procesion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idpaso" not-null="true" />
+            </key>
+            <one-to-many class="appcostal.model.Procesion" />
+        </set>
+        <set name="eventos" table="evento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idpaso" not-null="true" />
+            </key>
+            <one-to-many class="appcostal.model.Evento" />
+        </set>
+    </class>
+</hibernate-mapping>
